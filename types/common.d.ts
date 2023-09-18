@@ -7,6 +7,11 @@ type RegisterType = {
   confirmPassword: string;
 }
 
+type LoginType = {
+  email: string;
+  password: string;
+}
+
 type ResponseDataType = {
   success: boolean;
   data: any;

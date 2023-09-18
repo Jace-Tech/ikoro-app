@@ -1,5 +1,5 @@
 import { Link, useNavigation, useRouter } from "expo-router"
-import { Box, Button, Divider, FormControl, HStack, Select, Heading, IconButton, Input, Stack, Text, VStack, useDisclose, useTheme, KeyboardAvoidingView, ScrollView } from "native-base"
+import { Button, HStack, Heading, IconButton, Stack, Text, useDisclose, useTheme, KeyboardAvoidingView, ScrollView } from "native-base"
 import React, { useLayoutEffect } from "react"
 import AppContainer from "../../components/AppContainer"
 import { useForm } from "react-hook-form"
@@ -41,15 +41,16 @@ const RegisterScreen: React.FC<RegisterScreenProps> = () => {
     log("RESULT:", result)
     if(!result?.success) {
       openAlert(result.message, "error")
+      closeLoading()
       return
     }
 
     dispatch(populateUser(result.data?.user))
     dispatch(populateToken(result.data?.token))
-    openAlert(result.message, "success")
     closeLoading()
+    openAlert(result.message, "success")
     reset()
-    router.replace("/(main)/home")
+    router.replace("/(main)/")
   }
   return (
     <AppContainer bg={"black"} flex={1}>
@@ -139,12 +140,12 @@ const RegisterScreen: React.FC<RegisterScreenProps> = () => {
               }
             />
 
-            <Button isLoading={isLoading} onPress={handleRegister} mt={6} colorScheme={"red"} size={"lg"}>Register</Button>
+            <Button isLoading={isLoading} onPress={handleRegister} mt={6} colorScheme={"brand"} size={"lg"}>Register</Button>
 
             <HStack mt={4}>
               <Text color={"white"}>Already have an account?</Text>
               <Link href={"/(auth)/login"} asChild>
-                <Text color={"red.600"} ml={1} fontWeight={"semibold"}>Sign in</Text>
+                <Text color={"brand.600"} ml={1} fontWeight={"semibold"}>Sign in</Text>
               </Link>
             </HStack>
           </Stack>

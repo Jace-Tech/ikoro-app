@@ -34,11 +34,18 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
     "info": <Ionicons name="information-circle" size={24} color={colors.info[600]} />,
   }
 
+  const colorMap = {
+    "success": colors.success[600],
+    "error": colors.error[600],
+    "warning": colors.warning[600],
+    "info": colors.info[600],
+  }
+
   useEffect(() => {
     if (!isOpen) return
     setIntervalId(setTimeout(() => {
       onClose()
-    }, 4000))
+    }, 8000))
     return () => { intervalId && clearTimeout(intervalId) }
   }, [isOpen])
 
@@ -47,11 +54,11 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
       <Slide in={isOpen} placement="top">
         <Alert px={4} flexDirection={"row"} status={alert.type}>
           {IconMap[alert.type]}
-          <Text color={`${alert.type}.600`} fontWeight="medium">{alert.message}</Text>
+          <Text color={colorMap[alert.type]} fontWeight="medium">{alert.message}</Text>
           <Spacer />
           <IconButton
             onPress={onClose}
-            icon={<CloseIcon />}
+            icon={<CloseIcon color={colorMap[alert.type]} />}
             color={"gray.500"}
           />
         </Alert>

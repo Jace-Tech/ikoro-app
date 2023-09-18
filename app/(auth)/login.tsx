@@ -18,7 +18,6 @@ const LoginScreen: React.FC<LoginScreenProps> = () => {
   const { isOpen, onToggle } = useDisclose()
   const { isOpen: isLoading, onOpen: openLoading, onClose: closeLoading } = useDisclose()
   const { openAlert } = useAppContext()
-  const { setOptions } = useNavigation()
   const colors = useTheme()['colors']
 
   const dispatch = useAppDispatch()

@@ -10,9 +10,7 @@ interface WelcomeScreenProps { }
 const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
   const { transparentize } = themeTools
   const account = useAppSelector(state => state.accountStore.user)
-  // if (account) {
-  //   return <Redirect href={"/(main)/"} />
-  // }
+  if (account) return <Redirect href={"/(main)/"} />
   return (
     <ImageBackground style={{ flex: 1 }} source={require("../assets/bg.jpeg")}>
       <LinearGradient style={{ flex: 1, justifyContent: "flex-end" }} colors={["rgba(0, 0, 0, .8)", "rgba(0, 0, 0, .85)", "#000", "#000"]}>

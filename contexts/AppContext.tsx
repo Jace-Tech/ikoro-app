@@ -54,12 +54,13 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
       <Slide in={isOpen} placement="top">
         <Alert px={4} flexDirection={"row"} status={alert.type}>
           {IconMap[alert.type]}
-          <Text color={colorMap[alert.type]} fontWeight="medium">{alert.message}</Text>
+          <Text ml={2} color={colorMap[alert.type]} fontWeight="medium">{alert.message}</Text>
           <Spacer />
           <IconButton
             onPress={onClose}
+            colorScheme={alert.type}
             icon={<CloseIcon color={colorMap[alert.type]} />}
-            color={"gray.500"}
+            size={"sm"}
           />
         </Alert>
       </Slide>

@@ -1,6 +1,6 @@
-import { Link, useNavigation, useRouter } from "expo-router"
-import { Button, HStack, Heading, IconButton, Stack, Text, useDisclose, useTheme, KeyboardAvoidingView, ScrollView } from "native-base"
-import React, { useLayoutEffect } from "react"
+import { Link, useRouter } from "expo-router"
+import { Button, HStack, Heading, IconButton, Stack, Text, useDisclose, useTheme, KeyboardAvoidingView, ScrollView, Pressable } from "native-base"
+import React, {  } from "react"
 import AppContainer from "../../components/AppContainer"
 import { useForm } from "react-hook-form"
 import { Ionicons } from '@expo/vector-icons';
@@ -11,6 +11,7 @@ import { log } from "../../utils/helpers"
 import { useAppContext } from "../../contexts/AppContext"
 import { useAppDispatch } from "../../store/hook"
 import { populateToken, populateUser } from "../../store/slice/accountSlice"
+// import useFetch from "../../hooks/useFetch"
 
 
 interface LoginScreenProps { }
@@ -41,8 +42,9 @@ const LoginScreen: React.FC<LoginScreenProps> = () => {
     closeLoading()
     openAlert(result.message, "success")
     reset()
-    router.replace("/(main)/")
+    router.replace("/(main)/home")
   }
+
   return (
     <AppContainer bg={"black"} flex={1}>
       <Heading color={"white"} pb={3} mt={24} size={"xl"}>Login</Heading>
@@ -78,12 +80,14 @@ const LoginScreen: React.FC<LoginScreenProps> = () => {
               rules={{ required: "Password is required" }}
             />
 
-            <Button isLoading={isLoading} onPress={handleLogin} mt={6} colorScheme={"brand"} size={"lg"}>Login</Button>
+            <Button isLoading={isLoading} onPress={handleLogin} mt={6} colorScheme={"brand"} size={"lg"} py={4} _ios={{ py: 4 }}>Login</Button>
 
             <HStack mt={4}>
               <Text color={"white"}>Don't have an account?</Text>
               <Link href={"/(auth)/register"} asChild>
-                <Text color={"brand.600"} ml={1} fontWeight={"semibold"}>Sign up</Text>
+                <Pressable ml={1} hitSlop={10}>
+                  <Text color={"brand.600"} fontWeight={"semibold"}>Sign up</Text>
+                </Pressable>
               </Link>
             </HStack>
           </Stack>

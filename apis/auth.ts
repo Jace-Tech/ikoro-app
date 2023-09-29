@@ -1,7 +1,8 @@
 import { USER_LOGIN_ENDPOINT, USER_REGISTER_ENDPOINT } from "."
 import { log } from "../utils/helpers"
 
-export const registerUser = async (data: RegisterType): Promise<ResponseDataType> => {
+// HANDLE USER LOGIN
+export const registerUser = async (data: RegisterType, signal?: AbortSignal): Promise<ResponseDataType> => {
   try {
     const option: RequestInit = {
       method: "POST",
@@ -9,7 +10,8 @@ export const registerUser = async (data: RegisterType): Promise<ResponseDataType
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
-      }
+      },
+      signal
     }
     const request = await fetch(USER_REGISTER_ENDPOINT, option)
     const response = await request.json()
@@ -21,7 +23,8 @@ export const registerUser = async (data: RegisterType): Promise<ResponseDataType
   }
 }
 
-export const loginUser = async (data: LoginType): Promise<ResponseDataType> => {
+// HANDLE USER REGISTER
+export const loginUser = async (data: LoginType, signal?: AbortSignal): Promise<ResponseDataType> => {
   try {
     const option: RequestInit = {
       method: "POST",
@@ -29,7 +32,8 @@ export const loginUser = async (data: LoginType): Promise<ResponseDataType> => {
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
-      }
+      },
+      signal
     }
     const request = await fetch(USER_LOGIN_ENDPOINT, option)
     const response = await request.json()

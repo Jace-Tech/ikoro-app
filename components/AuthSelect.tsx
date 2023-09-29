@@ -11,7 +11,7 @@ const AuthSelect = ({ control, name, data, rules, ...rest }: AuthSelectProps) =>
   const { field, fieldState: { error } } = useController({ defaultValue: "", control, name, rules })
   return (
     <FormControl isInvalid={Boolean(error)}>
-      <Select color={"white"} size={"lg"} {...(field as any)} onValueChange={field.onChange} {...rest}>
+      <Select color={"white"} size={"lg"} py={3} _ios={{ py: 4 }} {...(field as any)} onValueChange={field.onChange} {...rest}>
         { data.map(item => (<Select.Item key={item.label} {...item} />)) }
       </Select>
       <FormControl.ErrorMessage fontSize={"xs"}>{error?.message}</FormControl.ErrorMessage>

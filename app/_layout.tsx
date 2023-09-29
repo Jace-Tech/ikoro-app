@@ -1,9 +1,8 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
-import { NativeBaseProvider, extendTheme } from 'native-base';
+import { NativeBaseProvider, StatusBar } from 'native-base';
 import { useEffect } from 'react';
-import theme from '../theme';
 import AppContextProvider from '../contexts/AppContext';
 import { Provider } from 'react-redux';
 import { persistor, store } from '../store';
@@ -67,18 +66,21 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <NativeBaseProvider theme={customTheme}>
-          <AppContextProvider>
-            <Stack screenOptions={{ statusBarColor: "#000" }}>
-              <Stack.Screen name="index" options={{ headerShown: false }} />
-              <Stack.Screen name="(auth)/register" />
-              <Stack.Screen name="(auth)/login" options={{ headerShown: false }} />
-            </Stack>
-          </AppContextProvider>
-        </NativeBaseProvider>
-      </PersistGate>
-    </Provider>
+    <>
+      <StatusBar animated barStyle={"default"}/>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <NativeBaseProvider theme={customTheme}>
+            <AppContextProvider>
+              <Stack screenOptions={{ statusBarColor: "#000", headerShown: false }}>
+                <Stack.Screen name="index" options={{ headerShown: false }} />
+                <Stack.Screen name="(auth)/register" />
+                <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+              </Stack>
+            </AppContextProvider>
+          </NativeBaseProvider>
+        </PersistGate>
+      </Provider>
+    </>
   );
 }

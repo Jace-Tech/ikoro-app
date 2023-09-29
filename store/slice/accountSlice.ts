@@ -1,8 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-const initialState = {
+type InitialStateType = {
+  user: UserData | null,
+  token: string | null,
+  isFirstTime: boolean,
+}
+const initialState: InitialStateType = {
   user: null,
-  token: null
+  token: null,
+  isFirstTime: true
 }
 
 const accountSlice = createSlice({
@@ -15,8 +21,15 @@ const accountSlice = createSlice({
     populateToken: (state, action) => {
       state.token = action.payload
     },
+    updateFirstTime: (state) => {
+      state.isFirstTime = false
+    },
+    clearAccountState: (state) => {
+      state.token = null
+      state.user = null
+    }
   }
 })
 
-export const { populateUser, populateToken } = accountSlice.actions
+export const { populateUser, populateToken, updateFirstTime, clearAccountState } = accountSlice.actions
 export default accountSlice.reducer
